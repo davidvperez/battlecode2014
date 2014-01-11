@@ -1,5 +1,6 @@
 package Sporcle;
 
+import battlecode.common.GameActionException;
 import battlecode.common.RobotController;
 
 public abstract class GenericRobot {
@@ -8,8 +9,13 @@ public abstract class GenericRobot {
 	
 	public GenericRobot(RobotController rc){
 		this.rc = rc;
-		tag = 0;
-		//TODO: Fix ID Generation
+		tag = -1;
+		try {
+			tag = rc.readBroadcast(0);
+		} catch (GameActionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	abstract public void run();
